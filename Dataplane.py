@@ -1,16 +1,12 @@
 from typing import List, Dict, Tuple
 from dataclasses import dataclass, field
 
-@dataclass(order=True)
-
+@dataclass
 class Flow:
     index: int = field(init=False, repr=False)
     prio: int # Priority
     match: Tuple[str, str] # (src, dst)
     outPort: str # Port string
-
-    def __post_init__(self)-> None:
-        object.__setattr__(self, "Sort", -self.prio) # Sorts the flows by priority in descending order
 
 
 @dataclass

@@ -45,6 +45,11 @@ class CLI(cmd.Cmd):
     
     def do_addswitch(self, arg: str) -> None: # Function to add a switch
         """Adds a switch to the network."""
+        check = arg.strip()
+        if len(check) != 1:
+            print("Invalid argument. AddSwitch <switchID>.")
+            return
+        
         self.sdn.addSwitch(arg.strip()) # Adds the switch to the network
 
     def do_addlink(self, arg: str) -> None: # Function to add a link

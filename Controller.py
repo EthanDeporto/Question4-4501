@@ -43,7 +43,17 @@ class SDN:
         return paths
     
     def flow(self, src: str, dst: str, priority: int = 10) -> None:
-        paths = self.kShortestPaths(src, dst, 2) # Finds shortest paths
+        if src not in self.switches or dst not in self.switches:
+            missingSwitch = src if src not in self.switches else dst
+            print(f"Switch {missingSwitch} does not exist.")
+            return
+            
+        try:
+            paths = self.kShortestPaths(src, dst, 2) # Finds shortest paths
+        except nx.NetworkXNoPath:
+            print(f"No path exists between {src} and {dst}.")
+            return
+        
         if not paths: # No path
             return 
         
